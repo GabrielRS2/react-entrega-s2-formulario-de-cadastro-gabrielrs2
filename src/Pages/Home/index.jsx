@@ -15,7 +15,10 @@ function Home({setFormData}) {
     email: yup.string().required("Email obrigatório").email("Email inválido"),
     password: yup.string().required("Senha obrigatória")
     .min(8, "Mínimo 8 caracteres")
-    .matches(/(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#.])[0-9a-zA-Z$*&@#]{8,}/, "Senha muito fraca"),
+    .matches(/(?=.*[a-z])/, "pelo menos um caracter minúsculo")
+    .matches(/(?=.*[A-Z])/, "pelo menos um caracter maiúsculo")
+    .matches(/(?=.*[$*&@#.])/, "pelo menos um caracter especial")
+    .matches(/(?=.*[0-9])/, "pelo menos um número"),
     confirmPassword: yup.string().required("Repita sua senha").oneOf([yup.ref("password")], "Senhas diferentes")
   });
 
